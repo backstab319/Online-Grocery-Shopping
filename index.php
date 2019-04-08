@@ -35,15 +35,21 @@
         </navbar>
     </div>
 
-    <div class="container text-center col-lg-6 col-xl-6">
-        <h1 class="display-4">Login</h1>
-        <p class="lead text-justify text-center">Please login to OGS to order groceries online</p>
-        <div class="form-group d-sm-flex justify-content-center">
+    <div class="background">
+    <div class="overlay">
+
+    <div class="container text-center col-lg-6 col-xl-6 jumbo d-flex justify-content-end">
+        <div class="pos">
+        <div class="form-group d-sm-flex justify-content-end">
+            <div class="pos2 col-lg-8 col-xl-8">
+            <h1 class="display-4 text-light">Login</h1>
+            <p class="lead text-justify text-center text-light">Please login to OGS to order groceries online</p>
             <form action="/index.php" method="POST">
-                <input type="text" class="form-control mb-2" name="userid" placeholder="Username">
-                <input type="password" class="form-control mb-2" name="pass" placeholder="Password">
-                <input type="submit" value="Login" class="form-control btn btn-outline-primary mb-2" name="login">
+                <input type="text" class="form-control mb-2 text-light" name="userid" placeholder="Username">
+                <input type="password" class="form-control mb-2 text-light" name="pass" placeholder="Password">
+                <input type="submit" value="Login" class="form-control btn btn-outline-light mb-2" name="login">
             </form>
+            </div>
         </div>
         <?php
             include "connect.php";
@@ -59,6 +65,10 @@
                 $row = $result->fetch_assoc();
                 if($password == $row["password"] and $password != NULL){
                     userinit($username);
+                    if($username == "admin"){
+                        header("Location: adminpage.php");
+                        exit();
+                    }
                     header("Location: grocery.php");
                     exit();
                 }else{
@@ -66,9 +76,13 @@
                 }
             }
         ?>
+        </div>
+    </div>
+    
+    </div>
     </div>
 
-    <div class="container jumbotron text-center col-lg-6 col-xl-6">
+    <div class="container jumbotron text-center col-lg-6 col-xl-6 mt-4">
         <h1 class="display-4">What is OGS?</h1>
         <p class="lead text-justify">It is a web-based project which is made for grocery shopping through Internet. As the technology 
         is being advanced the way of life is changing. Now a day’s we can place the order for anything from our home. There is no need to 
@@ -86,6 +100,12 @@
         features may come with it – for example, the automation of order confirmation emails etc.
         An increasing number of customer are relying on online booking in order to take order or purchase, and with this capability, 
         we can grab a significant amount of business as well as help the society to develop.
+        </p>
+    </div>
+
+    <div class="container jumbotron text-center col-lg-6 col-xl-6">
+        <h1 class="display-4">About Developer</h1>
+        <p class="lead text-justify text-center">OGS is being actively developed by Vijayshankar of BCA VI Semester 'B' Section
         </p>
     </div>
     
