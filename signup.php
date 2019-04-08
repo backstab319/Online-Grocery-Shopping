@@ -8,14 +8,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php
-        if(!isset($_COOKIE["user"])){
-        echo "<div class='container jumbotron text-center mt-2'>
-        <p class='lead'>Please login back in again to continue browsing grocery!</p>
-        </div>";
-        exit();
-        }
-    ?>
 
     <div class="navbar-section home">
         <navbar class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
