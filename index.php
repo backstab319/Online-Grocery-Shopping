@@ -1,3 +1,8 @@
+<?php
+    function userinit($username){
+        setcookie("user",$username,time()+1800,"/");
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -20,6 +25,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/index.php">Home</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signup.php">Sign up!</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -33,10 +41,31 @@
         <div class="form-group d-sm-flex justify-content-center">
             <form action="/index.php" method="POST">
                 <input type="text" class="form-control mb-2" name="userid" placeholder="Username">
-                <input type="text" class="form-control mb-2" name="pass" placeholder="Password">
-                <input type="submit" class="form-control btn btn-outline-primary mb-2" name="login">
+                <input type="password" class="form-control mb-2" name="pass" placeholder="Password">
+                <input type="submit" value="Login" class="form-control btn btn-outline-primary mb-2" name="login">
             </form>
         </div>
+        <?php
+            include "connect.php";
+            if(isset($_POST["login"])){
+                login();
+            }
+            function login(){
+                global $conn, $error;
+                $username = $_POST["userid"];
+                $password = $_POST["pass"];
+                $sql = "SELECT password FROM login_details WHERE user_id='$username'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                if($password == $row["password"] and $password != NULL){
+                    userinit($username);
+                    header("Location: grocery.php");
+                    exit();
+                }else{
+                    echo "<p class='lead'>The entered username or password is incorrect!</p>";
+                }
+            }
+        ?>
     </div>
 
     <div class="container jumbotron text-center col-lg-6 col-xl-6">
