@@ -91,7 +91,7 @@
             if($result->num_rows > 0){
                 orderloop($result);
             }
-            header("Location: cart.php");
+            header("Location: /cart.php");
         }
         function orderloop($result){
             global $user, $conn;
@@ -99,7 +99,7 @@
                 $name = $row["pr_name"];
                 $quan = $row["pr_quantity"];
                 $price = $row["pr_price"];
-                $sql = "INSERT INTO orders VALUES('$user','$name',$quan,$price)";
+                $sql = "INSERT INTO orders VALUES('$user','$name','$quan',$price)";
                 $conn->query($sql);
             }
             $sql = "DELETE FROM cart WHERE username='$user'";
