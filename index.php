@@ -23,6 +23,15 @@
                     <div class="navbar-menu ml-auto">
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <a class="nav-link" href="#dev">Developer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#how">Working of OGS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#about">About</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/index.php">Home</a>
                             </li>
                             <li class="nav-item">
@@ -38,9 +47,9 @@
     <div class="background">
     <div class="overlay">
 
-    <div class="container text-center col-lg-6 col-xl-6 jumbo d-flex justify-content-end">
+    <div class="container text-center col-lg-6 col-xl-6 jumbo d-flex justify-content-center">
         <div class="pos">
-        <div class="form-group d-sm-flex justify-content-end">
+        <div class="form-group d-sm-flex justify-content-center">
             <div class="pos2 col-lg-8 col-xl-8">
             <h1 class="display-4 text-light">Login</h1>
             <p class="lead text-justify text-center text-light">Please login to OGS to order groceries online</p>
@@ -82,7 +91,7 @@
     </div>
     </div>
 
-    <div class="container jumbotron text-center col-lg-6 col-xl-6 mt-4">
+    <div class="container jumbotron text-center col-lg-6 col-xl-6 mt-4" id="about">
         <h1 class="display-4">What is OGS?</h1>
         <p class="lead text-justify">It is a web-based project which is made for grocery shopping through Internet. As the technology 
         is being advanced the way of life is changing. Now a day’s we can place the order for anything from our home. There is no need to 
@@ -93,7 +102,7 @@
         thing from a popular shop. The product can be delivered at a door step.</p>
     </div>
 
-    <div class="container jumbotron text-center col-lg-6 col-xl-6">
+    <div class="container jumbotron text-center col-lg-6 col-xl-6" id="how">
         <h1 class="display-4">How does OGS work?</h1>
         <p class="lead text-justify">It’s a grocery shopping system that works by processing secure online ordering or purchasing made through our
         website. The data is then passed onto a backend system which can be accessed by our admin to manage the appointment. Other 
@@ -103,7 +112,7 @@
         </p>
     </div>
 
-    <div class="container jumbotron text-center col-lg-6 col-xl-6">
+    <div class="container jumbotron text-center col-lg-6 col-xl-6" id="dev">
         <h1 class="display-4">About Developer</h1>
         <p class="lead text-justify text-center">OGS is being actively developed by Vijayshankar of BCA VI Semester 'B' Section
         </p>
