@@ -39,7 +39,7 @@
         </navbar>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="fast">
         <h1 class="display-4">Fast Food's</h1>
         <div class="d-flex flex-wrap">
             <?php
@@ -50,12 +50,12 @@
                     $result = $conn->query($sql);
                     while($row = $result->fetch_assoc()){
                         echo "
-                            <div class='card col-lg-3 col-xl-3 mr-2 mb-2'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='200'>
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
-                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."' class='btn btn-outline-primary'>Buy</a>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#fast' class='btn btn-outline-primary'>Buy</a>
                                 </div>
                             </div>
                         ";
@@ -65,32 +65,186 @@
         </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="baked">
         <h1 class="display-4">Baked Food's</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                dispbakedfoods();
+                function dispbakedfoods(){
+                    global $conn;
+                    $sql = "SELECT * FROM baked_foods";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#baked' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="dairy">
         <h1 class="display-4">Dairy Product's</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                dispdairy();
+                function dispdairy(){
+                    global $conn;
+                    $sql = "SELECT * FROM dairy";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#dairy' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="fresh">
         <h1 class="display-4">Fresh Produce</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                dispproduce();
+                function dispproduce(){
+                    global $conn;
+                    $sql = "SELECT * FROM fresh_produce";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#fresh' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="frozen">
         <h1 class="display-4">Frozen Food's</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                dispfrozen();
+                function dispfrozen(){
+                    global $conn;
+                    $sql = "SELECT * FROM frozen_foods";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#frozen' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="house">
         <h1 class="display-4">Household Product's</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                disphousehold();
+                function disphousehold(){
+                    global $conn;
+                    $sql = "SELECT * FROM household";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#house' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="meat">
         <h1 class="display-4">Meat</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                dispmeat();
+                function dispmeat(){
+                    global $conn;
+                    $sql = "SELECT * FROM meat";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#meat' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
-    <div class="container text-center my-4 col-lg-6 col-xl-6">
+    <div class="container text-center my-4 col-lg-10 col-xl-10" id="staples">
         <h1 class="display-4">Staples</h1>
+        <div class="d-flex flex-wrap">
+            <?php
+                dispstaples();
+                function dispstaples(){
+                    global $conn;
+                    $sql = "SELECT * FROM staples";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()){
+                        echo "
+                            <div class='card col-lg-2 col-xl-2 mr-2 mb-2'>
+                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$row['pr_name']."</h5>
+                                    <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
+                                    <a href='grocery.php?pr_name=".$row['pr_name']."&pr_quantity=".$row["pr_quantity"]."&pr_price=".$row['pr_price']."&/#staples' class='btn btn-outline-primary'>Buy</a>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
+        </div>
     </div>
 
     <?php
@@ -103,7 +257,7 @@
         }
         function cart(){
             global $conn,$pr_name,$user,$pr_quantity,$pr_price;
-            $sql = "INSERT INTO cart VALUES('$user','$pr_name',$pr_quantity,$pr_price)";
+            $sql = "INSERT INTO cart VALUES('$user','$pr_name','$pr_quantity',$pr_price)";
             $conn->query($sql);
         }
     ?>
