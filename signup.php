@@ -33,6 +33,7 @@
         <div class="form-group d-flex justify-content-center">
             <form action="signup.php" method="POST">
                 <input type="text" class="form-control mb-2" name="userid" placeholder="Username">
+                <input type="text" class="form-control mb-2" name="address" placeholder="Address">
                 <input type="password" class="form-control mb-2" name="pass" placeholder="Password">
                 <input type="submit" value="Sign up" class="form-control btn btn-outline-primary mb-2" name="signup">
             </form>
@@ -46,8 +47,9 @@
                 global $conn;
                 $username = $_POST["userid"];
                 $password = $_POST["pass"];
-                if(($username and $password) != NULL){
-                    $sql = "INSERT INTO login_details VALUES('$username','$password')";
+                $address = $_POST["address"];
+                if(($username and $password and $address) != NULL){
+                    $sql = "INSERT INTO login_details VALUES('$username','$password','$address')";
                     echo "<p class='lead'>Signed up!</p>";
                     $conn->query($sql);
                 }else{
