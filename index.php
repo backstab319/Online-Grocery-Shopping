@@ -52,9 +52,9 @@
         <div class="form-group d-sm-flex justify-content-center">
             <div class="pos2 col-lg-8 col-xl-8">
             <h1 class="display-4 text-light">Login</h1>
-            <p class="lead text-justify text-center text-light">Please login to OGS to order groceries online</p>
+            <p class="lead text-justify text-center">Please login to OGS to order groceries online</p>
             <form action="/index.php" method="POST">
-                <input type="text" class="form-control mb-2 text-light" name="userid" placeholder="Username">
+                <input type="text" class="form-control mb-2" name="userid" placeholder="Username">
                 <input type="password" class="form-control mb-2 text-light" name="pass" placeholder="Password">
                 <input type="submit" value="Login" class="form-control btn btn-outline-light mb-2" name="login">
             </form>
