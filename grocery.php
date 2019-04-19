@@ -32,6 +32,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/cart.php">Cart</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/cancelorder.php">Cancel Order</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -51,7 +54,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -77,7 +80,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -103,7 +106,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -129,7 +132,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -155,7 +158,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -181,7 +184,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -207,7 +210,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2' id='".$row['pr_name']."'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -233,7 +236,7 @@
                     while($row = $result->fetch_assoc()){
                         echo "
                             <div class='card col-lg-2 col-xl-2 mr-2 mb-2'>
-                            <img class='card-img-top' src='/img/".$row['pr_name'].".jpg' height='150' width='150'>
+                            <img class='card-img-top' src='".$row["pr_image"]."' height='150' width='150'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$row['pr_name']."</h5>
                                     <p class='cart-text'>Quantity ".$row['pr_quantity']." Price ".$row['pr_price']."</p>
@@ -257,8 +260,17 @@
         }
         function cart(){
             global $conn,$pr_name,$user,$pr_quantity,$pr_price;
-            $sql = "INSERT INTO cart VALUES('$user','$pr_name','$pr_quantity',$pr_price)";
-            $conn->query($sql);
+            $sql = "SELECT * FROM cart WHERE pr_name='$pr_name'";
+            $result = $conn->query($sql);
+            if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                $nqu = $row["pr_quantity"] + 1;
+                $sql = "UPDATE cart SET pr_quantity='$nqu' WHERE pr_name='$pr_name' AND username='$user'";
+                $conn->query($sql);
+            }else{
+                $sql = "INSERT INTO cart VALUES('$user','$pr_name','$pr_quantity',$pr_price)";
+                $conn->query($sql);
+            }
         }
     ?>
     
