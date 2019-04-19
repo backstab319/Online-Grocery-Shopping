@@ -55,7 +55,7 @@
             <p class="lead text-justify text-center">Please login to OGS to order groceries online</p>
             <form action="/index.php" method="POST">
                 <input type="text" class="form-control mb-2" name="userid" placeholder="Username">
-                <input type="password" class="form-control mb-2 text-light" name="pass" placeholder="Password">
+                <input type="password" class="form-control mb-2" name="pass" placeholder="Password">
                 <input type="submit" value="Login" class="form-control btn btn-outline-light mb-2" name="login">
             </form>
             </div>
