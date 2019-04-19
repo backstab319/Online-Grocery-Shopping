@@ -60,14 +60,16 @@
                 <tr>
                 <th>Product</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Remove</th>
                 </thead>
             ";
             while($row = $result1->fetch_assoc()){
-                $total = $total + $row['pr_price'];
+                $total = $total + ($row['pr_price'] * $row["pr_quantity"]);
                 echo "<tr>
                     <td>".$row['pr_name']."</td>
                     <td>".$row['pr_price']."</td>
+                    <td>".$row['pr_quantity']."</td>
                     <td><a class='btn btn-outline-dark' href='cart.php?del=".$row['pr_name']."'>Delete</a></td>
                 ";
             }
@@ -111,8 +113,17 @@
         }
         function deleteitem($item){
             global $user, $conn;
-            $sql = "DELETE FROM cart WHERE pr_name='$item'";
-            $conn->query($sql);
+            $sql = "SELECT pr_quantity FROM orders WHERE username='$user' AND pr_name='$item'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            if($row["pr_quantity"] > 1){
+                $nqu = $row["pr_quantity"] - 1;
+                $sql = "UPDATE orders SET pr_quantity='$nqu' WHERE pr_name='$item' AND username='$user'";
+                $conn->query($sql);
+            }else{
+                $sql = "DELETE FROM orders WHERE pr_name='$item' AND username='$user'";
+                $conn->query($sql);
+            }
             header("Location: cart.php");
         }
     ?>
