@@ -36,6 +36,11 @@
         </navbar>
     </div>
 
+    <div class="container jumbotron text-center col-lg-6 col-xl-6">
+        <h1 class="display-4">Online Grocery Shopping Cpanel</h1>
+        <p class="lead text-justify text-center">Please use the tools given below to manage the grocery store</p>
+    </div>
+
     <div class="container text-center col-lg-6 col-xl-6">
         <h1 class="display-4">View Order's</h1>
         <div class="form-group d-flex justify-content-center">
@@ -104,6 +109,64 @@
             ";
         }
     ?>
+
+    <div class="container text-center col-lg-6 col-xl-6">
+        <h1 class="display-4">Update Store's Information</h1>
+        <div class="form-group d-flex justify-content-center">
+        <div class="form-group d-flex justify-content-center">
+        <form action="adminpage.php" method="POST">
+            <label for="item_grp">Select the item group to update</label>
+            <select name="item_grp" id="item_grp" class="form-control mb-2">
+                <option value="baked_foods">Baked Foods</option>
+                <option value="dairy">Dairy</option>
+                <option value="fast_foods">Fast Foods</option>
+                <option value="fresh_produce">Fresh Produce</option>
+                <option value="frozen_foods">Frozen Foods</option>
+                <option value="household">Household</option>
+                <option value="meat">Meat</option>
+                <option value="staples">Staples</option>
+            </select>
+            <label for="cattrib">Select current the item attribute to change</label>
+            <select name="cattrib" id="cattrib" class="form-control mb-2">
+                <option value="pr_name">Product Name</option>
+                <option value="pr_quantity">Product Quantity</option>
+                <option value="pr_price">Product Price</option>
+                <option value="pr_image">Product Image Link</option>
+            </select>
+            <input type="text" class="form-control mb-2" placeholder="Current Value" name="cval">
+            <label for="attrib">Select the item attribute to change</label>
+            <select name="attrib" id="attrib" class="form-control mb-2">
+                <option value="pr_name">Product Name</option>
+                <option value="pr_quantity">Product Quantity</option>
+                <option value="pr_price">Product Price</option>
+                <option value="pr_image">Product Image Link</option>
+            </select>
+            <input type="text" class="form-control mb-2" placeholder="New Value" name="nval">
+            <input type="submit" value="Update" name="update" class="btn btn-outline-primary form-control mb-2">
+        </form>
+        </div>
+        </div>
+        <?php
+            if(isset($_POST["update"])){
+                update();
+            }
+            function update(){
+                global $conn;
+                $table = $_POST["item_grp"];
+                $col = $_POST["attrib"];
+                $cval = $_POST["cval"];
+                $nval = $_POST["nval"];
+                $ccol = $_POST["cattrib"];
+                if(($table and $col and $cval and $nval and $ccol) != NULL){
+                    $sql = "UPDATE $table SET $col='$nval' WHERE $ccol='$cval'";
+                    $conn->query($sql);
+                    echo "<p class='lead text-center text-justify'>Item successfully updated!</p>";
+                }else{
+                    echo "<p class='lead text-center text-justify'>Please check all the input fields</p>";
+                }
+            }
+        ?>
+    </div>
 
     <div class="container text-center col-lg-6 col-xl-6">
         <h1 class="display-4">Delete completed orders</h1>
