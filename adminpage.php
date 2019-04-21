@@ -5,7 +5,7 @@
     <title>Admin Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <?php
@@ -110,9 +110,52 @@
         }
     ?>
 
+    <div class="container text-center col-lg-6 col-xl-6" id="add">
+    <h1 class="display-4">Add new item to the store</h1>
+        <div class="form-group d-flex justify-content-center">
+            <form action="adminpage.php" method="POST">
+                <label for="item_grp">Select the item group to update</label>
+                <select name="item_grp" id="item_grp" class="form-control mb-2">
+                    <option value="baked_foods">Baked Foods</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="fast_foods">Fast Foods</option>
+                    <option value="fresh_produce">Fresh Produce</option>
+                    <option value="frozen_foods">Frozen Foods</option>
+                    <option value="household">Household</option>
+                    <option value="meat">Meat</option>
+                    <option value="staples">Staples</option>
+                </select>
+                <input type="text" name="name" placeholder="Enter Product Name" class="form-control mb-2">
+                <input type="number" name="quantity" placeholder="Enter Product Quantity" class="form-control mb-2">
+                <input type="number" name="price" placeholder="Enter Product Price" class="form-control mb-2">
+                <input type="text" name="image" placeholder="Enter Product Image Link" class="form-control mb-2">
+                <input type="submit" name="add" value="Add Item" class="btn btn-outline-primary">
+            </form>
+        </div>
+        <?php
+            if(isset($_POST["add"])){
+                additem();
+            }
+            function additem(){
+                global $conn;
+                $table = $_POST["item_grp"];
+                $name = $_POST["name"];
+                $quantity = $_POST["quantity"];
+                $price = $_POST["price"];
+                $image = $_POST["image"];
+                if(($table and $name and $quantity and $price and $image) != NULL){
+                    $sql = "INSERT INTO $table VALUES('$name','$quantity','$price','$image')";
+                    $conn->query($sql);
+                    echo "<p class='lead text-center text-justify'>Item successfully Added!</p>";
+                }else{
+                    echo "<p class='lead text-center text-justify'>Please check all the fields</p>";
+                }
+            }
+        ?>
+    </div>
+
     <div class="container text-center col-lg-6 col-xl-6">
         <h1 class="display-4">Update Store's Information</h1>
-        <div class="form-group d-flex justify-content-center">
         <div class="form-group d-flex justify-content-center">
         <form action="adminpage.php" method="POST">
             <label for="item_grp">Select the item group to update</label>
@@ -163,6 +206,44 @@
                     echo "<p class='lead text-center text-justify'>Item successfully updated!</p>";
                 }else{
                     echo "<p class='lead text-center text-justify'>Please check all the input fields</p>";
+                }
+            }
+        ?>
+    </div>
+
+    <div class="container text-center col-lg-6 col-xl-6">
+        <h1 class="display-4">Delete Store items</h1>
+        <div class="form-group d-flex justify-content-center">
+            <form action="adminpage.php" method="POST">
+                <label for="item_grp">Select the item group to update</label>
+                <select name="item_grp" id="item_grp" class="form-control mb-2">
+                    <option value="baked_foods">Baked Foods</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="fast_foods">Fast Foods</option>
+                    <option value="fresh_produce">Fresh Produce</option>
+                    <option value="frozen_foods">Frozen Foods</option>
+                    <option value="household">Household</option>
+                    <option value="meat">Meat</option>
+                    <option value="staples">Staples</option>
+                </select>
+                <input type="text" name="name" placeholder="Product name" class="form-control mb-2">
+                <input type="submit" name="delete_item" value="Delete Item" class="btn btn-primary">
+            </form>
+        </div>
+        <?php
+            if(isset($_POST["delete_item"])){
+                delete_item();
+            }
+            function delete_item(){
+                global $conn;
+                $table = $_POST["item_grp"];
+                $name = $_POST["name"];
+                if(($table and $name)!= NULL){
+                    $sql = "DELETE FROM $table WHERE pr_name='$name'";
+                    $conn->query($sql);
+                    echo "<p class='lead text-center text-justify'>Item successfully Deleted!</p>";
+                }else{
+                    echo "<p class='lead text-center text-justify'>Item Not Deleted. Please check your inputs.</p>";
                 }
             }
         ?>
